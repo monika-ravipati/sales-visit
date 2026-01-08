@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Logging Visit...</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<script>
+navigator.geolocation.getCurrentPosition(
+  function(position) {
+    const lat = position.coords.latitude.toFixed(6);
+    const lng = position.coords.longitude.toFixed(6);
+
+    const formLink = "https://docs.google.com/forms/d/e/1FAIpQLScN2TIcvIJGAREwoh9UnAvqGbxjmEAhr9kX1goWKpSKCrLnRw/viewform?usp=pp_url&entry.707699089=12.3456&entry.507621852=77.5678";
+    const finalURL = formLink
+      .replace("12.3456", lat)
+      .replace("77.5678", lng);
+
+    window.location.replace(finalURL);
+  },
+  function() {
+    alert("Location access is mandatory to log visit.");
+  },
+  { enableHighAccuracy: true, timeout: 10000 }
+);
+</script>
+</body>
+</html>
