@@ -1,0 +1,31 @@
+<script>
+navigator.geolocation.getCurrentPosition(
+  function(position) {
+    const lat = position.coords.latitude.toFixed(6);
+    const lng = position.coords.longitude.toFixed(6);
+    const accuracy = position.coords.accuracy;
+
+    // Reject low-accuracy (network-based) locations
+    if (accuracy > 100) {
+      alert("Waiting for precise GPS location. Please stand still and try again.");
+      location.reload();
+      return;
+    }
+
+    const formLink = "https://docs.google.com/forms/d/e/1FAIpQLScN2TIcvIJGAREwoh9UnAvqGbxjmEAhr9kX1goWKpSKCrLnRw/viewform?usp=pp_url&entry.707699089=12.3456&entry.507621852=77.5678";
+    const finalURL = formLink
+      .replace("12.3456", lat)
+      .replace("77.5678", lng);
+
+    window.location.replace(finalURL);
+  },
+  function(error) {
+    alert("Unable to fetch location. Please enable GPS.");
+  },
+  {
+    enableHighAccuracy: true,
+    timeout: 20000,
+    maximumAge: 0
+  }
+);
+</script>
